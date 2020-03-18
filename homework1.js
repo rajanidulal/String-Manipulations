@@ -37,4 +37,57 @@ console.log("This is constantCase: \n"+constantCase(data));
 
 const titleCase= (result6)=>result6.replace(/ /g, ' ');
 console.log("This is titleCase: \n"+titleCase(properCase(data)));
+function escapeHTML(params)
+{
+	let str = params.replace(/[\W_]+/g, function(x)
+	{
+		switch(x)
+		{
+			case '&': 
+				return ' &amp; ' ;
+			case '<':
+				return ' $lt; ';
+			case '>':
+				return ' &gt; ';
+			case '"':
+				return ' &quot; ';
+			case "'":
+				return ' &#39; ';	
+			case "/":
+				return ' &#x2F; ';
+			case "`":
+				return '&#x60; ';
+			case "=":
+				return ' &#x3D; ';
+			default: 
+				return '$#x' + x.charCodeAt(0).toString(16);
+		}
+	})
+	console.log("This is HTML escaping : \n"+str)
+}
 
+
+function escapeJavascript(params)
+{
+	
+	let str = params.replace(/[\W_]+/g, function(x)
+	{
+		return '/x' + x.charCodeAt(0).toString(16);
+	})
+	console.log("This is Javascript escaping : \n "+str)
+}
+
+
+
+function escapeJSON(params)
+{
+		var str = params.replace(/[\W_]+/g, function(x)
+	{
+		return '\\u00' + x.charCodeAt(0).toString(16);
+	})
+	console.log("This is JSON escaping: \n "+ str)
+} 
+
+escapeHTML(file) 
+escapeJavascript(file)
+escapeJSON(file)
